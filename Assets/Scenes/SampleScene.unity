@@ -549,7 +549,7 @@ GameObject:
   - component: {fileID: 1297676923}
   - component: {fileID: 1297676922}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -706,13 +706,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bf1de925f32e7841bea12825666f891, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
-  groundDist: 0
-  terrainLayer:
+  moveSpeed: 5
+  jumpForce: 7
+  groundLayer:
     serializedVersion: 2
     m_Bits: 0
-  rb: {fileID: 1297676923}
-  sr: {fileID: 1297676920}
+  groundCheck: {fileID: 0}
+  groundCheckRadius: 0.2
+  spriteTransform: {fileID: 0}
+  faceCamera: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
