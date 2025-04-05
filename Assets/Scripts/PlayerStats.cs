@@ -2,26 +2,22 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    [Header("Health")]
+    [Header("Core Stats")]
     public int maxHealth = 100;
     public int currentHealth;
-    [Header("Strength")]
-    public int strength = 10;        // Damage output
-    [Header("Resilience")]
-    public int resilience = 5;       // Damage reduction
+    public int strength = 10;
+    public int resilience = 5;
 
     [Header("Blocking")]
     public bool isBlocking = false;
-    [Range(0f, 1f)] public float blockDamageReduction = 0.5f; // 50% damage reduction when blocking
+    [Range(0f, 1f)] public float blockDamageReduction = 0.5f;
 
     private void Start()
     {
         currentHealth = maxHealth;
+        Debug.Log($"[Player] Health Initialized: {currentHealth}/{maxHealth}");
     }
 
-    /// <summary>
-    /// Call this to damage the player
-    /// </summary>
     public void TakeDamage(int damage)
     {
         int finalDamage = damage - resilience;
@@ -29,12 +25,17 @@ public class PlayerStats : MonoBehaviour
         if (isBlocking)
         {
             finalDamage = Mathf.RoundToInt(finalDamage * (1f - blockDamageReduction));
+            Debug.Log($"[Player] Blocking! Raw: {damage}, Reduced by {resilience}, Block Reduced to: {finalDamage}");
+        }
+        else
+        {
+            Debug.Log($"[Player] Hit! Raw: {damage}, Reduced by {resilience}, Final: {finalDamage}");
         }
 
         finalDamage = Mathf.Clamp(finalDamage, 0, int.MaxValue);
         currentHealth -= finalDamage;
 
-        Debug.Log($"Player took {finalDamage} damage. Health: {currentHealth}/{maxHealth}");
+        Debug.Log($"[Player] Took {finalDamage} damage. Current Health: {currentHealth}/{maxHealth}");
 
         if (currentHealth <= 0)
         {
@@ -42,34 +43,25 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Heal the player
-    /// </summary>
     public void Heal(int amount)
     {
         currentHealth += amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        Debug.Log($"Player healed {amount}. Health: {currentHealth}/{maxHealth}");
+        Debug.Log($"[Player] Healed {amount}. Current Health: {currentHealth}/{maxHealth}");
     }
 
-    /// <summary>
-    /// Use this to toggle blocking on/off
-    /// </summary>
     public void SetBlocking(bool state)
     {
         isBlocking = state;
-        Debug.Log($"Blocking: {isBlocking}");
+        Debug.Log($"[Player] Blocking state set to: {isBlocking}");
     }
 
     private void Die()
     {
-        Debug.Log("Player has died.");
-        // Trigger death animation, disable controls, etc.
+        Debug.Log("[Player]  You have died.");
+        // Trigger death animation, etc.
     }
 
-    /// <summary>
-    /// Call to deal damage to enemies using strength
-    /// </summary>
     public int GetAttackDamage()
     {
         return strength;
