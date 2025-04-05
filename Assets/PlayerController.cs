@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
         // Jump
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce, rb.linearVelocity.z);
         }
 
         // Flip sprite based on movement direction (X only)
@@ -55,8 +55,8 @@ public class PlayerController : MonoBehaviour
         float moveZ = Input.GetAxis("Vertical");
 
         Vector3 move = new Vector3(moveX, 0f, moveZ).normalized * moveSpeed;
-        Vector3 velocity = new Vector3(move.x, rb.velocity.y, move.z);
-        rb.velocity = velocity;
+        Vector3 velocity = new Vector3(move.x, rb.linearVelocity.y, move.z);
+        rb.linearVelocity = velocity;
     }
 
     private void OnDrawGizmosSelected()
