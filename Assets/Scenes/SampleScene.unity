@@ -743,6 +743,7 @@ GameObject:
   - component: {fileID: 1671946385}
   - component: {fileID: 1671946384}
   - component: {fileID: 1671946383}
+  - component: {fileID: 1671946388}
   m_Layer: 0
   m_Name: Skeleton
   m_TagString: Untagged
@@ -937,6 +938,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkThreshold: 0.01
+--- !u!114 &1671946388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1671946379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3217065c40226a47868d4599d1f02a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1297676921}
 --- !u!1 &1795703751
 GameObject:
   m_ObjectHideFlags: 0
