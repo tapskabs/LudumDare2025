@@ -18,6 +18,25 @@ public class PlayerStats : MonoBehaviour
         Debug.Log($"[Player] Health Initialized: {currentHealth}/{maxHealth}");
     }
 
+    private void Update()
+    {
+        HandleBlockInput();
+    }
+
+    private void HandleBlockInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            isBlocking = true;
+            Debug.Log("[Player]  Blocking started.");
+        }
+        if (Input.GetKeyUp(KeyCode.Q))
+        {
+            isBlocking = false;
+            Debug.Log("[Player]  Blocking ended.");
+        }
+    }
+
     public void TakeDamage(int damage)
     {
         int finalDamage = damage - resilience;
@@ -43,23 +62,10 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
-    public void Heal(int amount)
-    {
-        currentHealth += amount;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        Debug.Log($"[Player] Healed {amount}. Current Health: {currentHealth}/{maxHealth}");
-    }
-
-    public void SetBlocking(bool state)
-    {
-        isBlocking = state;
-        Debug.Log($"[Player] Blocking state set to: {isBlocking}");
-    }
-
     private void Die()
     {
-        Debug.Log("[Player]  You have died.");
-        // Trigger death animation, etc.
+        Debug.Log("[Player] You have died.");
+        // Add death logic here
     }
 
     public int GetAttackDamage()
