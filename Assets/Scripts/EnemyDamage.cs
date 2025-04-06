@@ -7,6 +7,13 @@ public class EnemyDamage : MonoBehaviour
     public float damageCooldown = 1f;
     private float lastDamageTime;
 
+    private EnemyAnimatorController animatorController;
+
+    private void Start()
+    {
+        animatorController = GetComponent<EnemyAnimatorController>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         TryDamagePlayer(other);
@@ -25,9 +32,23 @@ public class EnemyDamage : MonoBehaviour
         PlayerStats player = other.GetComponent<PlayerStats>();
         if (player != null)
         {
-            Debug.Log($"[Enemy] Attacking player for {damage} damage.");
             player.TakeDamage(damage);
+            Debug.Log($"[Enemy] Attacked player for {damage} damage.");
+
+            // Trigger attack animation
+            if (animatorController != null)
+            {
+                animatorController.SetAttacking(true);
+                Invoke(nameof(ResetAttackAnimation), 0.2f); // Reset shortly after
+            }
+
             lastDamageTime = Time.time;
         }
+    }
+
+    private void ResetAttackAnimation()
+    {
+        if (animatorController != null)
+            animatorController.SetAttacking(false);
     }
 }
