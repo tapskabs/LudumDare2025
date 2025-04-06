@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
@@ -71,5 +72,10 @@ public class PlayerStats : MonoBehaviour
     public int GetAttackDamage()
     {
         return strength;
+    }
+
+    internal void TakeDamage(float damage)
+    {
+        throw new NotImplementedException();
     }
 }
