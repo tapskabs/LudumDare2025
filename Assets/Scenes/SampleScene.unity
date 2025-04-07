@@ -617,6 +617,8 @@ GameObject:
   - component: {fileID: 1297676923}
   - component: {fileID: 1297676925}
   - component: {fileID: 1297676926}
+  - component: {fileID: 1297676927}
+  - component: {fileID: 1297676928}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -779,9 +781,8 @@ MonoBehaviour:
   maxHealth: 30
   currentHealth: 0
   strength: 10
-  resilience: 5
   isBlocking: 0
-  blockDamageReduction: 0.5
+  resilience: 5
 --- !u!114 &1297676926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -800,6 +801,40 @@ MonoBehaviour:
     m_Bits: 64
   attackPoint: {fileID: 1076966552}
   attackCooldown: 0.5
+--- !u!95 &1297676927
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1297676918}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b95265f99b6d90e438df1308a89c8bab, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1297676928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1297676918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31c2844aadc158f4881ee08d8df16459, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1795703751
 GameObject:
   m_ObjectHideFlags: 0
@@ -1004,6 +1039,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 391822434649589535, guid: 605573c054770ec4d8fd24edf53e05b2, type: 3}
+      propertyPath: damageCooldown
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 814647925985135959, guid: 605573c054770ec4d8fd24edf53e05b2, type: 3}
       propertyPath: m_Name
       value: Skeleton

@@ -4,15 +4,17 @@ public class PlayerCombat : MonoBehaviour
 {
     public float attackRange = 1.5f;
     public LayerMask enemyLayer;
-    public Transform attackPoint; // Where the attack originates (e.g., player's hand)
+    public Transform attackPoint;
     public float attackCooldown = 0.5f;
 
     private PlayerStats playerStats;
+    private PlayerAnimatorController animController;
     private float lastAttackTime;
 
     void Start()
     {
         playerStats = GetComponent<PlayerStats>();
+        animController = GetComponent<PlayerAnimatorController>();
     }
 
     void Update()
@@ -26,9 +28,8 @@ public class PlayerCombat : MonoBehaviour
 
     void Attack()
     {
-        Debug.Log("[Player] Attack triggered!");
+        animController.PlayAttack();
 
-        // Detect enemies in range
         Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayer);
 
         foreach (Collider enemyCollider in hitEnemies)

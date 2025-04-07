@@ -2,70 +2,42 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    [Header("Core Stats")]
     public int maxHealth = 100;
     public int currentHealth;
     public int strength = 10;
+    public bool isBlocking = false;
     public int resilience = 5;
 
-    [Header("Blocking")]
-    public bool isBlocking = false;
-    [Range(0f, 1f)] public float blockDamageReduction = 0.5f;
+    private PlayerAnimatorController animController;
 
-    private void Start()
+    void Start()
     {
         currentHealth = maxHealth;
-        Debug.Log($"[Player] Health Initialized: {currentHealth}/{maxHealth}");
+        animController = GetComponent<PlayerAnimatorController>();
     }
 
-    private void Update()
+    public void TakeDamage(int damageAmount)
     {
-        HandleBlockInput();
-    }
-
-    private void HandleBlockInput()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            isBlocking = true;
-            Debug.Log("[Player]  Blocking started.");
-        }
-        if (Input.GetKeyUp(KeyCode.Q))
-        {
-            isBlocking = false;
-            Debug.Log("[Player]  Blocking ended.");
-        }
-    }
-
-    public void TakeDamage(int damage)
-    {
-        int finalDamage = damage - resilience;
-
         if (isBlocking)
         {
-            finalDamage = Mathf.RoundToInt(finalDamage * (1f - blockDamageReduction));
-          //  Debug.Log($"[Player] Blocking! Raw: {damage}, Reduced by {resilience}, Block Reduced to: {finalDamage}");
-        }
-        else
-        {
-           // Debug.Log($"[Player] Hit! Raw: {damage}, Reduced by {resilience}, Final: {finalDamage}");
+            damageAmount -= resilience;
+            damageAmount = Mathf.Max(0, damageAmount);
         }
 
-        finalDamage = Mathf.Clamp(finalDamage, 0, int.MaxValue);
-        currentHealth -= finalDamage;
+        currentHealth -= damageAmount;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
-       // Debug.Log($"[Player] Took {finalDamage} damage. Current Health: {currentHealth}/{maxHealth}");
+        Debug.Log($"[Player] Took {damageAmount} damage. Health: {currentHealth}/{maxHealth}");
 
         if (currentHealth <= 0)
         {
-            Die();
+            animController.PlayDeath();
+            Debug.Log("[Player] You died.");
         }
-    }
-
-    private void Die()
-    {
-        Debug.Log("[Player] You have died.");
-        // Add death logic here
+        else
+        {
+            animController.PlayHurt();
+        }
     }
 
     public int GetAttackDamage()
