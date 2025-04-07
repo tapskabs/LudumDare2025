@@ -44,17 +44,17 @@ public class PlayerStats : MonoBehaviour
         if (isBlocking)
         {
             finalDamage = Mathf.RoundToInt(finalDamage * (1f - blockDamageReduction));
-            Debug.Log($"[Player] Blocking! Raw: {damage}, Reduced by {resilience}, Block Reduced to: {finalDamage}");
+          //  Debug.Log($"[Player] Blocking! Raw: {damage}, Reduced by {resilience}, Block Reduced to: {finalDamage}");
         }
         else
         {
-            Debug.Log($"[Player] Hit! Raw: {damage}, Reduced by {resilience}, Final: {finalDamage}");
+           // Debug.Log($"[Player] Hit! Raw: {damage}, Reduced by {resilience}, Final: {finalDamage}");
         }
 
         finalDamage = Mathf.Clamp(finalDamage, 0, int.MaxValue);
         currentHealth -= finalDamage;
 
-        Debug.Log($"[Player] Took {finalDamage} damage. Current Health: {currentHealth}/{maxHealth}");
+       // Debug.Log($"[Player] Took {finalDamage} damage. Current Health: {currentHealth}/{maxHealth}");
 
         if (currentHealth <= 0)
         {

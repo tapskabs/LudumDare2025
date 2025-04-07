@@ -33,7 +33,7 @@ public class EnemyDamage : MonoBehaviour
         if (player != null)
         {
             player.TakeDamage(damage);
-            Debug.Log($"[Enemy] Attacked player for {damage} damage.");
+           //Debug.Log($"[Enemy] Attacked player for {damage} damage.");
 
             // Trigger attack animation
             if (animatorController != null)
