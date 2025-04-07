@@ -6,7 +6,7 @@ public class EnemyAnimatorController : MonoBehaviour
     private Animator animator;
     private Vector2 lastPosition;
 
-    public float walkThreshold = 0.01f; // Minimum movement to count as walking
+    public float walkThreshold = 0.01f; 
 
     private void Awake()
     {
