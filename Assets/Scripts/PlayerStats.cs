@@ -1,8 +1,13 @@
+using NUnit.Framework;
+using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    [Header("Core Stats")]
+    public static PlayerStats Instance;
+
+    [Header("Core stats")]
     public int maxHealth = 100;
     public int currentHealth;
     public int strength = 10;
@@ -10,12 +15,31 @@ public class PlayerStats : MonoBehaviour
 
     [Header("Blocking")]
     public bool isBlocking = false;
-    [Range(0f, 1f)] public float blockDamageReduction = 0.5f;
+    [UnityEngine.Range(0f, 1f)] public float blockDamageReduction = 0.5f;
+
+    private int[] statArray = new int[3];
+
+    private void Awake()
+    {
+        if (Instance)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
 
     private void Start()
     {
         currentHealth = maxHealth;
         Debug.Log($"[Player] Health Initialized: {currentHealth}/{maxHealth}");
+
+        statArray[0] = maxHealth;
+        statArray[1] = strength;
+        statArray[2] = resilience;
+
     }
 
     private void Update()
@@ -71,5 +95,18 @@ public class PlayerStats : MonoBehaviour
     public int GetAttackDamage()
     {
         return strength;
+    }
+
+    public void IncreaseStat(int statRange)
+    {
+        int increase = Random.Range(2, statRange);
+        maxHealth += increase;
+
+        increase = Random.Range(2, statRange);
+        strength += increase;
+
+        increase = Random.Range(2, statRange);
+        resilience += increase;
+
     }
 }
