@@ -14,14 +14,14 @@ public class PlayerAnimatorController : MonoBehaviour
     private void Update()
     {
         // Handle grounded/air
-        animator.SetBool("Grounded", IsGrounded()); // You'll need a proper IsGrounded() check
+        animator.SetBool("Grounded", IsGrounded()); 
         animator.SetFloat("AirSpeed", GetComponent<Rigidbody>().linearVelocity.y);
 
         // Set movement state
         float speed = new Vector2(GetComponent<Rigidbody>().linearVelocity.x, GetComponent<Rigidbody>().linearVelocity.z).magnitude;
         animator.SetInteger("AnimState", speed > 0.1f ? 1 : 0); // 0 = Idle, 1 = Run
 
-        // You can also control "Combat Idle" by adding a bool if you want
+       
     }
 
     public void PlayAttack()
