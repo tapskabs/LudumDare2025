@@ -99,7 +99,7 @@ public class PlayerStats : MonoBehaviour
     public void IncreaseStat(int statRange)
     {
         int increase = Random.Range(2, statRange);
-        maxHealth += increase;
+        currentHealth += (increase * 2);
 
         increase = Random.Range(2, statRange);
         strength += increase;
