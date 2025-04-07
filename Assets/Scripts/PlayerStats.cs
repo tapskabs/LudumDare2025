@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     public static PlayerStats Instance;
-
+    private PlayerAnimatorController animController;
     [Header("Core stats")]
     public int maxHealth = 100;
     public int currentHealth;
@@ -39,7 +39,7 @@ public class PlayerStats : MonoBehaviour
         statArray[0] = maxHealth;
         statArray[1] = strength;
         statArray[2] = resilience;
-
+        animController = GetComponent<PlayerAnimatorController>();
     }
 
     public void TakeDamage(int damage)
@@ -63,7 +63,13 @@ public class PlayerStats : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            animController.PlayDeath();
+           // Debug.Log("[Player]  You died.");
             Die();
+        }
+        else
+        {
+            animController.PlayHurt();
         }
     }
 
@@ -83,7 +89,6 @@ public class PlayerStats : MonoBehaviour
     private void Die()
     {
         Debug.Log("[Player]  You have died.");
-        // Trigger death animation, etc.
     }
 
     public int GetAttackDamage()
