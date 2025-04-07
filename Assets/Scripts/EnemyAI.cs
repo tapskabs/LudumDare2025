@@ -67,12 +67,12 @@ public class EnemyAI : MonoBehaviour
 
                 case state.Attack:
 
-                //Add in Attack Stuff
-                if (Vector2.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(player.position.x, player.position.z)) > attackDistance)
-                {
-                    currentState = state.RushPlayer;
-                }
-                break;
+                    //Add in Attack Stuff
+                    if (Vector2.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(player.position.x, player.position.z)) > attackDistance)
+                    {
+                        currentState = state.RushPlayer;
+                    }
+                    break;
 
         }//end Switch
 
